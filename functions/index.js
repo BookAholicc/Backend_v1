@@ -62,9 +62,11 @@ var db = admin.database();
 
 
 exports.home =functions.https.onRequest((request, response) => {
-		var homemod = require('./apis/home_api');
+		// var homemod = require('./apis/home_api');
 
-		homemod.initialize(request,response);
+		// homemod.initialize(request,response);
+
+		response.send("Hello Fucking World");
   });
 // =====================================================
 

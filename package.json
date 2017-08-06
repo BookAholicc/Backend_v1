@@ -9,7 +9,7 @@
   },
   "scripts": {
     "deploy": "gcloud app deploy",
-    "start": "node server.js",
+    "start": "node server.js"
    
   },
   "engines": {

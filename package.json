@@ -10,7 +10,7 @@
   "scripts": {
     "deploy": "gcloud app deploy",
     "start": "node server.js",
-    "test": "js"
+   
   },
   "engines": {
     "node": ">=4.2.6"

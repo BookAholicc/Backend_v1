@@ -3,18 +3,15 @@
   "version": "1.0.0",
   "description": "The Dev backend",
   "main": "index.js",
- "repository": {
+  "repository": {
     "type": "git",
     "url": "https://github.com/BookAholicc/Backend.git"
   },
-
   "scripts": {
     "deploy": "gcloud app deploy",
     "start": "node server.js",
-     "test": "js"
-    },
-
-
+    "test": "js"
+  },
   "engines": {
     "node": ">=4.2.6"
   },
@@ -30,15 +27,14 @@
     "debug": "~2.6.3",
     "ejs": "2.5.6",
     "express": "~4.15.2",
-    "firebase-admin": "^5.0.0",
-    "firebase-functions": "^0.5.7",
+    "firebase-admin": "^5.1.0",
+    "firebase-functions": "^0.5.9",
     "googleapis": "^19.0.0",
-    
     "morgan": "~1.8.1"
   },
   "devDependencies": {
     "nodemon": "^1.11.0"
   },
-    "requiresKeyFile": true,
-    "requiresProjectId": true
+  "requiresKeyFile": true,
+  "requiresProjectId": true
 }

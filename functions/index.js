@@ -32,6 +32,7 @@ const cors = require('cors')({origin: true});
 
 
 
+
 //The Root path of Db
 var db = admin.database();
 // Individual Modeules
@@ -651,6 +652,8 @@ exports.getUndeliveredOrders = functions.https.onRequest((req,res)=>{
 							});
 						});
 						if (!res.headersSent) {
+							res.set('Access-Control-Allow-Origin', "*");
+  							res.set('Access-Control-Allow-Methods', 'GET, POST');
 							res.send(returnJson);
 						}
 				});

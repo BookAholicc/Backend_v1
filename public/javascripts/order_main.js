@@ -130,12 +130,13 @@ var locations;
             var products = '';
             for (var j = 0; j<details.products.length;j++) {
                 products += 'Product Name: '+details.products[j].productName + ' <br>';
+                products += '<img src="' + details.products[j].imageURL+'" width="100"><br>';
                 products += 'Pid: ' +details.products[j].pid + ' <br>';
                 products += 'Amount: '+details.products[j].amountForWindow + '<br><br>';
             }
             infoWindowContent[i].push('<div class="info_content">' +
-                '<h3>'+details.firstName+details.lastName+'</h3>' +
-                '<p>User Id: '+ details.userId +'<br><br>Products ordered:<br>'+products+'<hr>Total Amount: '+details.amount+'</p>' + '</div>');
+                '<h3>'+details.firstName+' '+details.lastName+'</h3>' +
+                '<p>User Id: '+ details.userId +'<br><br><u>Products ordered:</u><br>'+products+'-----<br>Total Amount: '+details.amount+'</p>' + '</div>');
         }
 
             // Add multiple markers to map

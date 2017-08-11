@@ -88,57 +88,85 @@ function createCORSRequest(method, url) {
 */
 
 var link = 'https://us-central1-bookaholic-786.cloudfunctions.net/getUndeliveredOrders';
-
+var locations;
 
     $.ajax({
 		url: link,
 		dataType: 'json',
 		success: function(res){
             console.log('Success!');
+            locations = res;
+            initMap();
         },
         error: function(){alert('Error retrieving data. Please try again later.');}
 	}); 
     
     function initMap() {
-        var uluru = {lat:12.9716, lng:77.59};
-        var map = new google.maps.Map(document.getElementById('map'), {
-          zoom: 13,
-          center: uluru
-        });
-        
-        
+            var map;
+            var bounds = new google.maps.LatLngBounds();
+            var mapOptions = {
+                mapTypeId: 'roadmap'
+            };
 
-        var contentString = '<div id="content">'+
-            '<div id="siteNotice">'+
-            '</div>'+
-            '<h1 id="firstHeading" class="firstHeading">Uluru</h1>'+
-            '<div id="bodyContent">'+
-            '<p><b>Uluru</b>, also referred to as <b>Ayers Rock</b>, is a large ' +
-            'sandstone rock formation in the southern part of the '+
-            'Northern Territory, central Australia. It lies 335&#160;km (208&#160;mi) '+
-            'south west of the nearest large town, Alice Springs; 450&#160;km '+
-            '(280&#160;mi) by road. Kata Tjuta and Uluru are the two major '+
-            'features of the Uluru - Kata Tjuta National Park. Uluru is '+
-            'sacred to the Pitjantjatjara and Yankunytjatjara, the '+
-            'Aboriginal people of the area. It has many springs, waterholes, '+
-            'rock caves and ancient paintings. Uluru is listed as a World '+
-            'Heritage Site.</p>'+
-            '<p>Attribution: Uluru, <a href="https://en.wikipedia.org/w/index.php?title=Uluru&oldid=297882194">'+
-            'https://en.wikipedia.org/w/index.php?title=Uluru</a> '+
-            '(last visited June 22, 2009).</p>'+
-            '</div>'+
-            '</div>';
+            // Display a map on the web page
+            map = new google.maps.Map(document.getElementById("map"), mapOptions);
+            map.setTilt(50);
 
-        var infowindow = new google.maps.InfoWindow({
-          content: contentString
-        });
+            // Multiple markers location, latitude, and longitude
+        var markers = [];
+        for (var i=0; i<locations.orders.length; i++){
+            markers[i] = [];
+            markers[i].push(locations.orders[i].firstName + locations.orders[i].lastName);
+            markers[i].push(locations.orders[i].orderLat);
+            markers[i].push(locations.orders[i].orderLon);
+        }
+        console.log(markers);
 
-        var marker = new google.maps.Marker({
-          position: uluru,
-          map: map,
-          title: 'Uluru (Ayers Rock)'
-        });
-        marker.addListener('click', function() {
-          infowindow.open(map, marker);
-        });
+            // Info window content
+        var infoWindowContent = [];
+        for (var i=0; i<locations.orders.length; i++){
+            var details = locations.orders[i];
+            infoWindowContent[i]= [];
+            var products = '';
+            for (var j = 0; j<details.products.length;j++) {
+                products += 'Product Name: '+details.products[j].productName + ' <br>';
+                products += 'Pid: ' +details.products[j].pid + ' <br>';
+                products += 'Amount: '+details.products[j].amountForWindow + '<br><br>';
+            }
+            infoWindowContent[i].push('<div class="info_content">' +
+                '<h3>'+details.firstName+details.lastName+'</h3>' +
+                '<p>User Id: '+ details.userId +'<br><br>Products ordered:<br>'+products+'<hr>Total Amount: '+details.amount+'</p>' + '</div>');
+        }
+
+            // Add multiple markers to map
+            var infoWindow = new google.maps.InfoWindow(), marker, i;
+
+            // Place each marker on the map  
+            for( i = 0; i < markers.length; i++ ) {
+                var position = new google.maps.LatLng(markers[i][1], markers[i][2]);
+                bounds.extend(position);
+                marker = new google.maps.Marker({
+                    position: position,
+                    map: map,
+                    title: markers[i][0]
+                });
+
+                // Add info window to marker    
+                google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                    return function() {
+                        infoWindow.setContent(infoWindowContent[i][0]);
+                        infoWindow.open(map, marker);
+                    }
+                })(marker, i));
+
+                // Center the map to fit all markers on the screen
+                map.fitBounds(bounds);
+            }
+
+            // Set zoom level
+            var boundsListener = google.maps.event.addListener((map), 'bounds_changed', function(event) {
+                google.maps.event.removeListener(boundsListener);
+            });
+        // Load initialize function
+        google.maps.event.addDomListener(window, 'load', initMap);
       }

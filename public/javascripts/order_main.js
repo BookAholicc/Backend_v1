@@ -96,6 +96,7 @@ var locations;
 		success: function(res){
             console.log('Success!');
             locations = res;
+            $('#text').text('Order count: ' + locations.orders.length);
             initMap();
         },
         error: function(){alert('Error retrieving data. Please try again later.');}

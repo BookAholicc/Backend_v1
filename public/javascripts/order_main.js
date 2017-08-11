@@ -4,6 +4,8 @@
 'use strict';
 
 
+/*
+code below was used earlier
 
 function ConsoleManager() {
 
@@ -82,3 +84,18 @@ function createCORSRequest(method, url) {
   }
   return xhr;
 }
+
+*/
+
+var link = 'https://us-central1-bookaholic-786.cloudfunctions.net/getUndeliveredOrders';
+
+$(document).ready(function(){
+    $.ajax({
+		url: link,
+		dataType: 'json',
+		success: function(res){
+            console.log('Success!');
+        },
+        error: function(){alert('Error retrieving data. Please try again later.');}
+	}); 
+});

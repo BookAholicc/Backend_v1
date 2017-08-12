@@ -3,7 +3,7 @@
 
 'use strict';
 
-//code used earlier using cors
+//code used earlier
 /*
 code below was used earlier
 
@@ -90,7 +90,7 @@ function createCORSRequest(method, url) {
 var link = 'https://us-central1-bookaholic-786.cloudfunctions.net/getUndeliveredOrders';
 var locations;
 
-    $.ajax({
+$.ajax({
 		url: link,
 		dataType: 'json',
 		success: function(res){
@@ -98,11 +98,12 @@ var locations;
             locations = res;
             $('#text').text('Order count: ' + locations.orders.length);
             initMap();
+            showOrdersList();
         },
         error: function(){alert('Error retrieving data. Please try again later.');}
 	}); 
     
-    function initMap() {
+function initMap() {
             var map;
             var bounds = new google.maps.LatLngBounds();
             var mapOptions = {
@@ -172,3 +173,17 @@ var locations;
         // Load initialize function
         google.maps.event.addDomListener(window, 'load', initMap);
       }
+
+function showOrdersList() {
+    var orders = locations.orders;
+    for (var i = 0; i < orders.length; i++) {
+        var products = orders[i].products;
+        var products_ordered = '';
+        for (var j = 0; j<products.length;j++) {
+            products_ordered += '<div style="margin-bottom: 10px;"><img src="'+products[j].imageURL+'" width="100"><br>'+products[j].productName+' Product ID: '+products[j].pid+'<br>Price: '+products[j].amountForWindow+'</div>';
+        }
+        $('#order_list_root').append(
+            '<div class = "order_details mdl-card mdl-shadow--4dp"><div class="mdl-card__title"><h2 class="mdl-card__title-text">'+orders[i].firstName + ' ' + orders[i].lastName+' (User ID: '+orders[i].userId+')</h2></div><div style="padding: 20px;"><h4>Products Ordered</h4>'+products_ordered+'<br>Total Amount: '+orders[i].amount+'</div></div>'
+        );
+    }
+}

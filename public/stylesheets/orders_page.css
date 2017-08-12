@@ -1,27 +1,23 @@
 
+#map {
+    padding-top: 10px;
+    margin: auto;
+   width: 95%;
+   height: 400px;
+   background-color: grey;
+ }
 
-.top_header{
-
-	margin-top: 40px;
-	margin-left: 40px;
-	height: 80px;
-	float: left;
-	width: 80%;
-	display: inline-block;
-
+#order_list_root {
+    width: 95%;
+    margin: auto;
+    margin-top: 10px;
 }
 
 
-
-
-#map {
-   width: 80%;
-   height: 300px;
-   margin-left: 30px;
-   margin-right: 30px;
-
-   background-color: grey;
- }
+.order_details {
+    width: 100%;
+    margin-bottom: 10px;
+}
 
 .top_cotainer{
 	margin-top: 20px;
@@ -35,12 +31,4 @@
 	height: 40px;
 	margin-left: 16px;
 
-}
-
-
-#orders_count{
-	margin-left: 50px;
-	text-align: center;
-	margin-top: 10px;
-	font-size: 20px;
 }

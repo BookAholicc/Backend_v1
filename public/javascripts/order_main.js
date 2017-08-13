@@ -182,7 +182,7 @@ function showOrdersList() {
             products_ordered += '<div class="demo-card-square mdl-card mdl-shadow--2dp"><div class="mdl-card__title mdl-card--expand" style="background: url('+products[j].imageURL+');"><h2 class="mdl-card__title-text">'+products[j].productName+'</h2></div><div class="mdl-card__supporting-text">Product ID: '+products[j].pid+'<br>Price: '+products[j].amountForWindow+'</div></div>';
         }
         $('#order_list_root').append(
-            '<div class = "order_details mdl-card mdl-shadow--4dp"><div class="mdl-card__title"><h2 class="mdl-card__title-text">'+orders[i].firstName + ' ' + orders[i].lastName+' (User ID: '+orders[i].userId+')</h2></div><div style="padding: 20px;"><h4>Products Ordered</h4><div style="overflow-x: auto;">'+products_ordered+'</div><div style="clear: both; margin-left: 10px;">Total Amount: '+orders[i].amount+'</div></div></div>'
+            '<div class = "order_details mdl-card mdl-shadow--4dp"><div class="mdl-card__title"><h2 class="mdl-card__title-text">'+orders[i].firstName + ' ' + orders[i].lastName+' (User ID: '+orders[i].userId+')</h2></div><div style="padding: 20px;"><h4>Products Ordered</h4><div style="overflow-x: auto;">'+products_ordered+'</div><div style="clear: both; margin-left: 10px; font-size: 1.2em;">Total Amount: '+orders[i].amount+'</div></div></div>'
         );
     }
 }

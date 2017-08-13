@@ -25,7 +25,14 @@
     width: 250px;
 }
 
+.demo-card-square > .mdl-card__supporting-text {
+    color: black;
+    font-size: 1.2em;
+}
+
 .demo-card-square > .mdl-card__title > h2 {
     color: white !important;
     text-shadow: 2px 2px 3px black;
+    background-color: black;
+    opacity: 0.9;
 }

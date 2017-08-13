@@ -1,10 +1,9 @@
 
 #map {
-    padding-top: 10px;
     margin: auto;
-   width: 95%;
-   height: 400px;
-   background-color: grey;
+    width: 95%;
+    height: 400px;
+    background-color: grey;
  }
 
 #order_list_root {
@@ -17,18 +16,16 @@
 .order_details {
     width: 100%;
     margin-bottom: 10px;
+    position: relative;
 }
 
-.top_cotainer{
-	margin-top: 20px;
-	width: 80%;
-	height: 40px;
-	margin-left: 16px;
+.demo-card-square {
+    float: left;
+    margin: 10px;
+    width: 250px;
 }
-.root_cotainer{
-	margin-top: 20px;
-	width: 80%;
-	height: 40px;
-	margin-left: 16px;
 
+.demo-card-square > .mdl-card__title > h2 {
+    color: white !important;
+    text-shadow: 2px 2px 3px black;
 }

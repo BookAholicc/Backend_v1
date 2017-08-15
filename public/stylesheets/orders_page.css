@@ -17,6 +17,7 @@
     width: 100%;
     margin-bottom: 10px;
     position: relative;
+    min-height: 100px !important;
 }
 
 .demo-card-square {
